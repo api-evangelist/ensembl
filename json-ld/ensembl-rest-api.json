@@ -1,0 +1,768 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "schema": "https://schema.org/",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@type": "WebAPI",
+  "@id": "https://rest.ensembl.org",
+  "name": "Ensembl REST API",
+  "description": "The Ensembl REST API (v15.12) provides language-agnostic HTTP access to genome annotation data across hundreds of vertebrate and eukaryotic species. It exposes 19 endpoint categories covering genome sequences, gene and transcript lookups, variant effect prediction (VEP), comparative genomics (gene trees, homology, alignments), coordinate mapping between assemblies, regulatory features, linkage disequilibrium, ontology and taxonomy queries, phenotype annotations, and GA4GH-compliant genomic data access.",
+  "url": "https://rest.ensembl.org",
+  "version": "15.12",
+  "documentation": "https://rest.ensembl.org/documentation",
+  "provider": {
+    "@type": "Organization",
+    "name": "Ensembl / EMBL-EBI",
+    "url": "https://www.ensembl.org",
+    "sameAs": [
+      "https://www.ebi.ac.uk"
+    ]
+  },
+  "termsOfService": "https://www.ensembl.org/info/about/legal/index.html",
+  "license": "https://github.com/Ensembl/ensembl-rest/blob/main/LICENSE",
+  "keywords": [
+    "Genomics",
+    "Bioinformatics",
+    "Gene Annotation",
+    "Variant Effect Prediction",
+    "Comparative Genomics",
+    "Sequence Retrieval",
+    "VEP",
+    "GA4GH",
+    "Life Sciences",
+    "REST API"
+  ],
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://rest.ensembl.org",
+    "serviceType": "REST"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "description": "Free public access, no authentication required"
+  },
+  "mainEntityOfPage": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://github.com/Ensembl/ensembl-rest",
+      "name": "ensembl-rest",
+      "applicationCategory": "REST API Server",
+      "operatingSystem": "Linux",
+      "programmingLanguage": "Perl",
+      "codeRepository": "https://github.com/Ensembl/ensembl-rest"
+    }
+  ],
+  "hasPart": [
+    {
+      "@type": "WebAPI",
+      "name": "Archive Endpoints",
+      "description": "Retrieve archived stable identifiers",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Archive by ID",
+          "description": "Uses the given identifier to return its latest version",
+          "target": "https://rest.ensembl.org/archive/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Post Archive IDs",
+          "description": "Retrieve the stable IDs for multiple identifiers",
+          "target": "https://rest.ensembl.org/archive/id",
+          "httpMethod": "POST"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Comparative Genomics Endpoints",
+      "description": "Gene trees, homology, and genomic alignments",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Cafe Gene Tree",
+          "description": "Retrieves a cafe tree of the gene tree using the gene tree stable identifier",
+          "target": "https://rest.ensembl.org/cafe/genetree/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Cafe Gene Tree by Symbol",
+          "description": "Retrieves the cafe tree of the gene tree that contains the gene identified by a symbol",
+          "target": "https://rest.ensembl.org/cafe/genetree/member/symbol/{species}/{symbol}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Cafe Gene Tree by Species ID",
+          "description": "Retrieves the cafe tree of the gene tree that contains the gene/transcript/translation stable identifier in the given species",
+          "target": "https://rest.ensembl.org/cafe/genetree/member/id/{species}/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Gene Tree",
+          "description": "Retrieves a gene tree for a gene tree stable identifier",
+          "target": "https://rest.ensembl.org/genetree/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Gene Tree by Symbol",
+          "description": "Retrieves the gene tree that contains the gene identified by a symbol",
+          "target": "https://rest.ensembl.org/genetree/member/symbol/{species}/{symbol}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Gene Tree by Species ID",
+          "description": "Retrieves the gene tree that contains the gene/transcript/translation stable identifier in the given species",
+          "target": "https://rest.ensembl.org/genetree/member/id/{species}/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Genomic Alignment by Region",
+          "description": "Retrieves genomic alignments as separate blocks based on a region and species",
+          "target": "https://rest.ensembl.org/alignment/region/{species}/{region}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Homology by ID",
+          "description": "Retrieves homology information (orthologs) by species and Ensembl gene id",
+          "target": "https://rest.ensembl.org/homology/id/{species}/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Homology by Symbol",
+          "description": "Retrieves homology information (orthologs) by symbol",
+          "target": "https://rest.ensembl.org/homology/symbol/{species}/{symbol}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Cross-References Endpoints",
+      "description": "External database lookups and cross-references",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get XRefs by Symbol",
+          "description": "Looks up an external symbol and returns all Ensembl objects linked to it",
+          "target": "https://rest.ensembl.org/xrefs/symbol/{species}/{symbol}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get XRefs by ID",
+          "description": "Perform lookups of Ensembl Identifiers and retrieve their external references in other databases",
+          "target": "https://rest.ensembl.org/xrefs/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get XRefs by Name",
+          "description": "Performs a lookup based upon the primary accession or display label of an external reference",
+          "target": "https://rest.ensembl.org/xrefs/name/{species}/{name}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Information Endpoints",
+      "description": "Metadata about available data, species, assemblies, and compara databases",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Species Analysis",
+          "description": "List the names of analyses involved in generating Ensembl data",
+          "target": "https://rest.ensembl.org/info/analysis/{species}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Assembly Info",
+          "description": "List the currently available assemblies for a species, along with toplevel sequences, chromosomes and cytogenetic bands",
+          "target": "https://rest.ensembl.org/info/assembly/{species}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Assembly Stats by Region",
+          "description": "Returns information about the specified toplevel sequence region for the given species",
+          "target": "https://rest.ensembl.org/info/assembly/{species}/{region_name}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Biotypes",
+          "description": "List the functional classifications of gene models that Ensembl associates with a particular species",
+          "target": "https://rest.ensembl.org/info/biotypes/{species}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Compara Methods",
+          "description": "List all compara analyses available",
+          "target": "https://rest.ensembl.org/info/compara/methods",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Compara Species Sets",
+          "description": "List all collections of species analysed with the specified compara method",
+          "target": "https://rest.ensembl.org/info/compara/species_sets/{method}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get External Databases",
+          "description": "Lists all available external sources for a species",
+          "target": "https://rest.ensembl.org/info/external_dbs/{species}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Ensembl Divisions",
+          "description": "Get list of all Ensembl divisions for which information is available",
+          "target": "https://rest.ensembl.org/info/divisions",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Genome Info",
+          "description": "Find information about a given genome",
+          "target": "https://rest.ensembl.org/info/genomes/{genome_name}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Species List",
+          "description": "Lists all available species, their aliases, available adaptor groups and data release",
+          "target": "https://rest.ensembl.org/info/species",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Variation Sources",
+          "description": "List the variation sources used in Ensembl for a species",
+          "target": "https://rest.ensembl.org/info/variation/{species}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Linkage Disequilibrium Endpoints",
+      "description": "LD data for variants in human populations",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get LD for Variant",
+          "description": "Computes and returns LD values between the given variant and all other variants in a window centered around the given variant",
+          "target": "https://rest.ensembl.org/ld/{species}/{id}/{population_name}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get LD for Region",
+          "description": "Computes and returns LD values between all pairs of variants in the defined region",
+          "target": "https://rest.ensembl.org/ld/{species}/region/{region}/{population_name}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get LD for Variant Pair",
+          "description": "Computes and returns LD values between the given variants",
+          "target": "https://rest.ensembl.org/ld/{species}/pairwise/{id1}/{id2}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Lookup Endpoints",
+      "description": "Look up identifiers and symbols for genes, transcripts, and translations",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Lookup by ID",
+          "description": "Find the species and database for a single identifier e.g. gene, transcript, protein",
+          "target": "https://rest.ensembl.org/lookup/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Lookup Multiple IDs",
+          "description": "Find the species and database for several identifiers",
+          "target": "https://rest.ensembl.org/lookup/id",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "Lookup by Symbol",
+          "description": "Find the species and database for a symbol in a linked external database",
+          "target": "https://rest.ensembl.org/lookup/symbol/{species}/{symbol}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Lookup Multiple Symbols",
+          "description": "Find the species and database for a set of symbols in a linked external database",
+          "target": "https://rest.ensembl.org/lookup/symbol/{species}",
+          "httpMethod": "POST"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Mapping Endpoints",
+      "description": "Map coordinates between assemblies and from CDNA/CDS/protein to genome",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Map Assembly Coordinates",
+          "description": "Convert the co-ordinates of one assembly to another",
+          "target": "https://rest.ensembl.org/map/{species}/{asm_one}/{region}/{asm_two}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Map CDNA to Genome",
+          "description": "Convert from cDNA coordinates to genomic coordinates",
+          "target": "https://rest.ensembl.org/map/cdna/{id}/{region}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Map CDS to Genome",
+          "description": "Convert from CDS coordinates to genomic coordinates",
+          "target": "https://rest.ensembl.org/map/cds/{id}/{region}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Map Protein to Genome",
+          "description": "Given a protein ID, position and allele, return the genomic change(s)",
+          "target": "https://rest.ensembl.org/map/translation/{id}/{region}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Ontology and Taxonomy Endpoints",
+      "description": "Gene Ontology annotations and NCBI taxonomy queries",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Ontology by ID",
+          "description": "Search for an ontological term by its namespaced identifier",
+          "target": "https://rest.ensembl.org/ontology/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Ontology by Name",
+          "description": "Search for a list of ontological terms by their name",
+          "target": "https://rest.ensembl.org/ontology/name/{name}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Ontology Ancestors",
+          "description": "Reconstruct the entire ancestry of a term from is_a and part_of relationships",
+          "target": "https://rest.ensembl.org/ontology/ancestors/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Taxonomy by ID",
+          "description": "Search for a taxonomic term by its identifier or name",
+          "target": "https://rest.ensembl.org/taxonomy/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Taxonomy Classification",
+          "description": "Return the taxonomic classification of a taxon node",
+          "target": "https://rest.ensembl.org/taxonomy/classification/{id}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Overlap Endpoints",
+      "description": "Retrieve features overlapping a genomic region",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Overlap by ID",
+          "description": "Retrieves features (e.g. genes, transcripts, variants and more) that overlap a region defined by the given identifier",
+          "target": "https://rest.ensembl.org/overlap/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Overlap by Region",
+          "description": "Retrieves multiple types of features for a given region",
+          "target": "https://rest.ensembl.org/overlap/region/{species}/{region}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Overlap by Translation",
+          "description": "Retrieve features related to a specific Translation as described by its stable ID",
+          "target": "https://rest.ensembl.org/overlap/translation/{id}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Phenotype Annotation Endpoints",
+      "description": "Phenotype annotations for genomic features",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Phenotype by Accession",
+          "description": "Return phenotype annotations for genomic features given a phenotype ontology accession",
+          "target": "https://rest.ensembl.org/phenotype/accession/{species}/{accession}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Phenotype by Gene",
+          "description": "Return phenotype annotations for a given gene",
+          "target": "https://rest.ensembl.org/phenotype/gene/{species}/{gene}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Phenotype by Region",
+          "description": "Return phenotype annotations that overlap a given genomic region",
+          "target": "https://rest.ensembl.org/phenotype/region/{species}/{region}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Phenotype by Term",
+          "description": "Return phenotype annotations for genomic features given a phenotype ontology term",
+          "target": "https://rest.ensembl.org/phenotype/term/{species}/{term}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Regulatory Endpoints",
+      "description": "Regulatory features and activity across cell types",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Regulatory Feature",
+          "description": "Returns a RegulatoryFeature given its stable ID",
+          "target": "https://rest.ensembl.org/regulatory/{species}/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "List Epigenomes",
+          "description": "Returns the list of epigenomes available for the given species",
+          "target": "https://rest.ensembl.org/regulatory/species/{species}/epigenome",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Sequence Endpoints",
+      "description": "Genomic, transcript, and protein sequence retrieval",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Sequence by ID",
+          "description": "Request multiple types of biological sequences based on the input identifier",
+          "target": "https://rest.ensembl.org/sequence/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Multiple Sequences by ID",
+          "description": "Request multiple types of biological sequences based on multiple input identifiers",
+          "target": "https://rest.ensembl.org/sequence/id",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Sequence by Region",
+          "description": "Returns the genomic sequence of the specified region of the given species",
+          "target": "https://rest.ensembl.org/sequence/region/{species}/{region}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Multiple Sequences by Region",
+          "description": "Returns the genomic sequence of multiple regions of the given species",
+          "target": "https://rest.ensembl.org/sequence/region/{species}",
+          "httpMethod": "POST"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Transcript Haplotype Endpoints",
+      "description": "Transcript haplotype data",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Transcript Haplotypes",
+          "description": "Computes observed transcript haplotype sequences based on phased genotype data",
+          "target": "https://rest.ensembl.org/transcript_haplotypes/{species}/{id}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Variant Effect Prediction (VEP) Endpoints",
+      "description": "Predict functional consequences of variants on genes, transcripts, and proteins",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "VEP by HGVS",
+          "description": "Fetch variant consequences based on a HGVS notation",
+          "target": "https://rest.ensembl.org/vep/{species}/hgvs/{hgvs_notation}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "VEP by ID",
+          "description": "Fetch variant consequences based on a variant identifier",
+          "target": "https://rest.ensembl.org/vep/{species}/id/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "VEP by Region",
+          "description": "Fetch variant consequences based on a region in VCF format",
+          "target": "https://rest.ensembl.org/vep/{species}/region/{region}/{allele}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "VEP Multiple by HGVS",
+          "description": "Fetch variant consequences for multiple HGVS notations",
+          "target": "https://rest.ensembl.org/vep/{species}/hgvs",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "VEP Multiple by ID",
+          "description": "Fetch variant consequences for multiple variant identifiers",
+          "target": "https://rest.ensembl.org/vep/{species}/id",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "VEP Multiple by Region",
+          "description": "Fetch variant consequences for multiple regions/alleles in VCF format",
+          "target": "https://rest.ensembl.org/vep/{species}/region",
+          "httpMethod": "POST"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "Variation Endpoints",
+      "description": "Variant and genotype data",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "Get Variant by ID",
+          "description": "Uses a variant identifier to return the variation features including optional genotype, phenotype and population data",
+          "target": "https://rest.ensembl.org/variation/{species}/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get Multiple Variants by ID",
+          "description": "Uses a list of variant identifiers to return the variation features",
+          "target": "https://rest.ensembl.org/variation/{species}",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "Get PMCID Variants",
+          "description": "Retrieve variants associated with a PubMed Central article",
+          "target": "https://rest.ensembl.org/variation/{species}/pmcid/{pmcid}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "Get PMID Variants",
+          "description": "Retrieve variants associated with a PubMed article",
+          "target": "https://rest.ensembl.org/variation/{species}/pmid/{pmid}",
+          "httpMethod": "GET"
+        }
+      ]
+    },
+    {
+      "@type": "WebAPI",
+      "name": "GA4GH Endpoints",
+      "description": "Global Alliance for Genomics and Health (GA4GH) compliant genomic data access endpoints",
+      "potentialAction": [
+        {
+          "@type": "Action",
+          "name": "GA4GH Beacon",
+          "description": "Determine if a SNP exists in a collection of variants",
+          "target": "https://rest.ensembl.org/ga4gh/beacon",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Beacon Query",
+          "description": "Return information about the Ensembl Beacon for the GA4GH Beacon protocol",
+          "target": "https://rest.ensembl.org/ga4gh/beacon/query",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Call Sets",
+          "description": "Return a list of call sets in GA4GH format",
+          "target": "https://rest.ensembl.org/ga4gh/callsets/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Call Set",
+          "description": "Return the call set corresponding to an id",
+          "target": "https://rest.ensembl.org/ga4gh/callsets/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Datasets",
+          "description": "Return a list of datasets in GA4GH format",
+          "target": "https://rest.ensembl.org/ga4gh/datasets/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Dataset",
+          "description": "Return the dataset corresponding to an id",
+          "target": "https://rest.ensembl.org/ga4gh/datasets/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Features",
+          "description": "Return a list of features in GA4GH format",
+          "target": "https://rest.ensembl.org/ga4gh/features/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Feature",
+          "description": "Return the feature corresponding to an id",
+          "target": "https://rest.ensembl.org/ga4gh/features/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search References",
+          "description": "Return a list of reference sequences in GA4GH format",
+          "target": "https://rest.ensembl.org/ga4gh/references/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Reference",
+          "description": "Return information about a single reference sequence",
+          "target": "https://rest.ensembl.org/ga4gh/references/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Reference Sets",
+          "description": "Return a list of reference sets in GA4GH format",
+          "target": "https://rest.ensembl.org/ga4gh/referencesets/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Reference Set",
+          "description": "Return information about a single reference set",
+          "target": "https://rest.ensembl.org/ga4gh/referencesets/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Variants",
+          "description": "Return variant call information in GA4GH format for a region on a reference sequence",
+          "target": "https://rest.ensembl.org/ga4gh/variants/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Variant",
+          "description": "Return the variant corresponding to an id",
+          "target": "https://rest.ensembl.org/ga4gh/variants/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Variant Annotations",
+          "description": "Return variant annotation information in GA4GH format for a region on a reference sequence",
+          "target": "https://rest.ensembl.org/ga4gh/variantannotations/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Variant Annotation Sets",
+          "description": "Return a list of variant annotation sets in GA4GH format",
+          "target": "https://rest.ensembl.org/ga4gh/variantannotationsets/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Variant Annotation Set",
+          "description": "Return the variant annotation set corresponding to an id",
+          "target": "https://rest.ensembl.org/ga4gh/variantannotationsets/{id}",
+          "httpMethod": "GET"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Search Variant Sets",
+          "description": "Return a list of variant sets in GA4GH format",
+          "target": "https://rest.ensembl.org/ga4gh/variantsets/search",
+          "httpMethod": "POST"
+        },
+        {
+          "@type": "Action",
+          "name": "GA4GH Get Variant Set",
+          "description": "Return the variant set corresponding to an id",
+          "target": "https://rest.ensembl.org/ga4gh/variantsets/{id}",
+          "httpMethod": "GET"
+        }
+      ]
+    }
+  ],
+  "sameAs": [
+    "https://github.com/Ensembl/ensembl-rest",
+    "https://www.ebi.ac.uk/Tools/common/tools/help/index.html"
+  ],
+  "dateModified": "2026-06-13",
+  "inLanguage": "en"
+}

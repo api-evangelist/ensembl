@@ -59,6 +59,8 @@ apis:
         url: https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits
       - type: GitHubRepository
         url: https://github.com/Ensembl/ensembl-rest
+      - type: JSONLd
+        url: json-ld/ensembl-rest-api.json
 common:
   - type: Website
     url: https://www.ensembl.org
