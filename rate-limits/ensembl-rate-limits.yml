@@ -1,0 +1,86 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Ensembl
+providerId: ensembl
+created: '2026-06-13'
+modified: '2026-06-13'
+reconciled: true
+tags:
+  - Genomics
+  - Bioinformatics
+  - Genome Annotation
+  - Life Sciences
+  - Rate Limiting
+description: >-
+  The Ensembl REST API applies per-IP rate limiting of 55,000 requests per
+  hour (approximately 15 requests per second). No authentication is required
+  and no API key is needed. Rate limit state is communicated via
+  X-RateLimit-* response headers. When the quota is exhausted the API
+  returns HTTP 429 with a Retry-After header indicating the fractional
+  number of seconds the client must wait before resuming. For high-volume
+  use cases Ensembl recommends mirroring the database locally or using
+  FTP bulk downloads.
+sources:
+  - https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits
+  - https://rest.ensembl.org
+responseCodes:
+  throttled: 429
+  unauthorized: 403
+  serverError: 500
+limits:
+  - name: Requests Per Hour
+    scope: ip_address
+    metric: requests
+    limit: 55000
+    timeFrame: hour
+    notes: >-
+      55,000 requests per rolling hour per source IP address. Applies to all
+      REST API endpoints equally. Shared IP addresses (e.g. corporate NAT or
+      cloud egress) share this quota across all users behind that IP.
+  - name: Recommended Request Rate
+    scope: ip_address
+    metric: requests
+    limit: 15
+    timeFrame: second
+    notes: >-
+      Ensembl recommends clients self-throttle to 15 requests per second to
+      avoid exhausting the hourly quota and to be a good citizen on the shared
+      public infrastructure.
+headers:
+  - name: X-RateLimit-Limit
+    description: Total number of requests allowed in the current period (55000).
+  - name: X-RateLimit-Period
+    description: Duration of the rate limit window in seconds (3600).
+  - name: X-RateLimit-Remaining
+    description: Number of requests remaining in the current window.
+  - name: X-RateLimit-Reset
+    description: Seconds until the rate limit quota resets.
+  - name: Retry-After
+    description: >-
+      Fractional seconds the client must wait before retrying after a 429
+      response. Present only when the rate limit is exceeded.
+policies:
+  - name: Self-Throttle to 15 req/s
+    description: >-
+      All example clients in the official Ensembl documentation self-throttle
+      to 15 requests per second and honour the Retry-After header when
+      encountered.
+  - name: Backoff on 429
+    description: >-
+      When a 429 response is received clients must stop querying and sleep for
+      at least the number of seconds specified in the Retry-After header before
+      resuming.
+  - name: Shared IP Awareness
+    description: >-
+      Users behind a shared NAT or corporate proxy share the 55,000 req/hr
+      quota with all other users at that IP. Consider running a local Ensembl
+      database mirror for high-throughput institutional use.
+  - name: Bulk Data via FTP
+    description: >-
+      For large-scale data retrieval (full genome sequences, complete gene
+      sets, VCF files) use the Ensembl FTP service rather than the REST API
+      to avoid rate limit constraints.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

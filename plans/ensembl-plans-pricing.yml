@@ -1,0 +1,76 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Ensembl
+providerId: ensembl
+created: '2026-06-13'
+modified: '2026-06-13'
+reconciled: true
+tags:
+  - Genomics
+  - Bioinformatics
+  - Genome Annotation
+  - Life Sciences
+  - Plans
+description: >-
+  The Ensembl REST API is provided free of charge by the European Bioinformatics
+  Institute (EMBL-EBI) and Wellcome Sanger Institute as a public scientific
+  resource. There are no commercial plans, subscription tiers, or paid access
+  levels. All users access the same public endpoint at rest.ensembl.org with
+  a shared rate limit of 55,000 requests per hour per IP address. For
+  high-throughput or large-scale data needs, Ensembl recommends using the
+  FTP download service or the Perl API against a local Ensembl database
+  mirror rather than the REST API.
+sources:
+  - https://rest.ensembl.org
+  - https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits
+  - https://www.ensembl.org/info/docs/api/index.html
+plans:
+  - id: ensembl-public-free
+    name: Public Free Access
+    type: free
+    description: >-
+      Open, unauthenticated access to the Ensembl REST API for all users.
+      No registration or API key is required. All 19 endpoint categories
+      (Archive, Comparative Genomics, Cross References, Information, Linkage
+      Disequilibrium, Lookup, Mapping, Ontologies, Overlap, Phenotype
+      Annotations, Regulation, Sequence, Transcript Haplotypes, VEP,
+      Variation, and Variation GA4GH) are available under this plan.
+    entries:
+      - label: Requests per Hour
+        name: requests_per_hour
+        type: rate-limit
+        metric: requests
+        limit: 55000
+        timeFrame: hour
+        unit: 1
+        price: 0
+        userMultiplied: false
+      - label: Requests per Second (recommended)
+        name: requests_per_second
+        type: rate-limit
+        metric: requests
+        limit: 15
+        timeFrame: second
+        unit: 1
+        price: 0
+        userMultiplied: false
+    elements:
+      - name: Sequence Retrieval
+      - name: Gene and Transcript Lookup
+      - name: Variant Effect Prediction (VEP)
+      - name: Comparative Genomics (Gene Trees, Homology, Alignments)
+      - name: Cross References (External Database Mapping)
+      - name: Coordinate Mapping Between Assemblies
+      - name: Linkage Disequilibrium Calculations
+      - name: Ontology and Taxonomy Queries
+      - name: Overlap Feature Retrieval
+      - name: Phenotype Annotations
+      - name: Regulatory Feature Data
+      - name: Transcript Haplotypes
+      - name: GA4GH-Compliant Genomic Data Access
+      - name: Batch POST Operations
+      - name: Archive and Identifier Versioning
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

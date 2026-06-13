@@ -1,0 +1,113 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Ensembl
+providerId: ensembl
+created: '2026-06-13'
+modified: '2026-06-13'
+reconciled: true
+tags:
+  - Genomics
+  - Bioinformatics
+  - Genome Annotation
+  - Life Sciences
+  - FinOps
+  - FOCUS
+description: >-
+  FOCUS-aligned FinOps for Ensembl. The Ensembl REST API carries zero direct
+  monetary cost — it is a free public scientific resource operated by
+  EMBL-EBI and Wellcome Sanger Institute. FinOps considerations therefore
+  focus on the indirect cost of compute consumed while calling the API
+  (cloud egress, worker time, retry overhead) and on choosing the correct
+  data access method (REST API vs. FTP bulk download vs. local database
+  mirror) to minimise wasted spend in downstream pipelines. Pipelines that
+  exceed the 55,000 req/hr rate limit incur opportunity cost from retries
+  and pipeline delays rather than direct API charges.
+sources:
+  - https://rest.ensembl.org
+  - https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits
+  - https://www.ensembl.org/info/docs/api/index.html
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: EMBL-EBI / Wellcome Sanger Institute
+serviceCategory: Bioinformatics / Genomics Data
+billingModel:
+  pricingCategory: Free (No Direct Charge)
+  billingFrequency: N/A
+  billingCurrency: N/A
+  chargeCategories:
+    - Usage
+focusColumns:
+  ServiceName: Ensembl REST API
+  ServiceCategory: Bioinformatics
+  ProviderName: Ensembl (EMBL-EBI)
+  PublisherName: European Bioinformatics Institute
+  InvoiceIssuerName: N/A
+  BillingCurrency: N/A
+  ChargeCategory: Usage
+meters:
+  - name: api_requests
+    description: >-
+      Count of HTTP requests made to rest.ensembl.org. No direct charge, but
+      each request counts against the 55,000 req/hr quota and consumes
+      downstream compute time (worker CPU, network egress).
+    unit: request
+    aggregation: sum
+    dimensions:
+      - endpoint_category
+      - method
+      - species
+  - name: retry_requests
+    description: >-
+      Count of retry requests triggered by 429 rate limit responses. Each
+      retry represents wasted pipeline time and indirect compute cost.
+    unit: request
+    aggregation: sum
+    dimensions:
+      - endpoint_category
+      - pipeline_name
+  - name: bulk_download_bytes
+    description: >-
+      Volume of data retrieved via Ensembl FTP bulk download as an alternative
+      to repeated REST calls. Relevant for cloud egress cost attribution.
+    unit: byte
+    aggregation: sum
+    dimensions:
+      - dataset
+      - species
+      - release_version
+principles:
+  - name: Visibility
+    description: >-
+      Instrument pipeline code to count REST API calls per endpoint category
+      and species. Track X-RateLimit-Remaining in logs to detect when
+      pipelines are approaching quota exhaustion before 429s appear.
+  - name: Allocation
+    description: >-
+      Tag API calls with a pipeline_name or team label in application logs so
+      that indirect compute cost (worker time, egress) can be attributed to
+      the correct cost centre. Separate test and production pipeline traffic
+      by IP or via local mirrors to prevent development runs from consuming
+      the shared production quota.
+  - name: Optimization
+    description: >-
+      Use batch POST endpoints for multi-identifier lookups to reduce per-call
+      overhead. For full-genome or species-wide datasets, prefer the Ensembl
+      FTP service over repeated REST calls to avoid rate limit delays. Stand
+      up a local Ensembl database mirror for high-throughput institutional
+      pipelines that regularly exceed 55,000 req/hr. Cache stable reference
+      data (gene annotations, assembly metadata) locally to eliminate
+      redundant API calls.
+  - name: Accountability
+    description: >-
+      Assign a bioinformatics lead as the responsible owner for API usage
+      budgets within shared compute environments. Review pipeline retry rates
+      monthly; a rising retry rate signals that the pipeline needs batching
+      optimisation or a local mirror before cloud egress costs escalate.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

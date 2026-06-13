@@ -1,0 +1,89 @@
+aid: ensembl
+name: Ensembl
+description: >-
+  Ensembl is a genome annotation database and browser maintained by the European
+  Bioinformatics Institute (EMBL-EBI) and the Wellcome Sanger Institute. It
+  provides comprehensive genome data for vertebrates and other eukaryotic organisms,
+  covering gene annotation, variant data, regulatory features, comparative genomics,
+  and evolutionary analysis across hundreds of species. The Ensembl REST API offers
+  language-agnostic HTTP access to this genome data without requiring local database
+  installations or Perl API dependencies.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+created: '2026-06-13'
+modified: '2026-06-13'
+position: Producer
+tags:
+  - Genomics
+  - Bioinformatics
+  - Genome Annotation
+  - Variant Annotation
+  - Comparative Genomics
+  - Life Sciences
+  - REST API
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/ensembl/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+  - aid: ensembl:rest-api
+    name: Ensembl REST API
+    description: >-
+      The Ensembl REST API (v15.12) provides language-agnostic HTTP access to
+      genome annotation data across hundreds of vertebrate and eukaryotic species.
+      It exposes 19 endpoint categories covering genome sequences, gene and
+      transcript lookups, variant effect prediction (VEP), comparative genomics
+      (gene trees, homology, alignments), coordinate mapping between assemblies,
+      regulatory features, linkage disequilibrium, ontology and taxonomy queries,
+      phenotype annotations, and GA4GH-compliant genomic data access. Both GET
+      and POST methods are available; POST endpoints support batch operations
+      for multiple identifiers. No authentication is required for public use.
+    humanURL: https://rest.ensembl.org
+    baseURL: https://rest.ensembl.org
+    tags:
+      - Genomics
+      - Gene Annotation
+      - Variant Effect Prediction
+      - Comparative Genomics
+      - Sequence Retrieval
+      - VEP
+      - GA4GH
+    properties:
+      - type: Documentation
+        url: https://rest.ensembl.org/documentation
+      - type: Website
+        url: https://rest.ensembl.org
+      - type: ChangeLog
+        url: https://github.com/Ensembl/ensembl-rest/wiki/Change-Log
+      - type: RateLimits
+        url: https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits
+      - type: GitHubRepository
+        url: https://github.com/Ensembl/ensembl-rest
+common:
+  - type: Website
+    url: https://www.ensembl.org
+  - type: Documentation
+    url: https://rest.ensembl.org/documentation
+  - type: RateLimits
+    url: https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits
+  - type: GitHubOrganization
+    url: https://github.com/Ensembl
+  - type: GitHubRepository
+    url: https://github.com/Ensembl/ensembl-rest
+  - type: Tutorial
+    url: https://github.com/Ensembl/rest-api-jupyter-course
+  - type: License
+    url: https://github.com/Ensembl/ensembl-rest/blob/main/LICENSE
+  - type: TermsOfService
+    url: https://www.ensembl.org/info/about/legal/index.html
+  - type: PrivacyPolicy
+    url: https://www.ebi.ac.uk/data-protection/ensembl/privacy-notice
+  - type: Plans
+    url: plans/ensembl-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ensembl-rate-limits.yml
+  - type: FinOps
+    url: finops/ensembl-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
