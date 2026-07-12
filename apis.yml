@@ -62,6 +62,8 @@ apis:
       - type: JSONLD
         url: json-ld/ensembl-rest-api.json
 common:
+  - type: DomainSecurity
+    url: security/ensembl-domain-security.yml
   - type: Website
     url: https://www.ensembl.org
   - type: Documentation
