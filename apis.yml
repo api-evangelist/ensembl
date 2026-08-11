@@ -74,6 +74,10 @@ apis:
       - type: JSONLD
         url: json-ld/ensembl-rest-api.json
 common:
+  - type: IssueTracker
+    url: https://github.com/Ensembl/ensembl-rest/issues
+  - type: CodeOfConduct
+    url: https://github.com/Ensembl/.github/blob/master/CODE_OF_CONDUCT.md
   - type: DomainSecurity
     url: security/ensembl-domain-security.yml
   - type: Website
