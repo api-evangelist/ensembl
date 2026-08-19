@@ -36,7 +36,7 @@ tags:
   - REST API
 url: >-
   https://raw.githubusercontent.com/api-evangelist/ensembl/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
   - aid: ensembl:rest-api
     name: Ensembl REST API
