@@ -1,0 +1,97 @@
+edges:
+- partner_name: ELIXIR bio.tools (Web API records)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://bio.tools/t?toolType=%22Web%20API%22
+  match:
+    method: domain
+    domain: ensembl.org
+    seen_as:
+    - credit url (unstated)
+    - homepage
+    registered_as:
+    - Ensembl Compara
+  life_sciences:
+    register: biotools
+    listings:
+    - id: Ensembl_Compara
+      name: Ensembl Compara
+    listings_total: 1
+    signals:
+    - Bioinformatics
+    - Comparative genomics
+    - Phylogenetics
+    - Phylogenomics
+    - Sequence analysis
+  contract_reference:
+    register: ELIXIR bio.tools (Web API records)
+    spec_file: null
+    role: biotools-web-api
+    registered_name: Ensembl Compara
+    register_id: Ensembl_Compara
+    matched_domain: ensembl.org
+    detected_by: sweep-life-sciences.py
+    detected: '2026-10-15'
+  detected_by: sweep-life-sciences.py
+  first_seen: '2026-10-15'
+- partner_name: identifiers.org registry (resources)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  channel: standard-directory
+  relationship: standard-participant
+  evidence: https://registry.identifiers.org/registry
+  match:
+    method: domain
+    domain: ensembl.org
+    seen_as:
+    - resolution urlPattern
+    - resource home
+    registered_as:
+    - EnSembl, Sanger Institute and European Bioinformatics Institute, Hinxton, Cambridge
+  life_sciences:
+    register: idorg
+    listings:
+    - prefix: lrg
+      mir: MIR:00100627
+      resource: Locus Reference Genomic through Ensembl
+      official: false
+    - prefix: lrg
+      mir: MIR:00100629
+      resource: Locus Reference Genomic through Ensembl mirror (asia)
+      official: false
+    - prefix: lrg
+      mir: MIR:00100631
+      resource: Locus Reference Genomic through Ensembl mirror (US east)
+      official: false
+    listings_total: 3
+    signals:
+    - lrg
+  contract_reference:
+    register: identifiers.org registry (resources)
+    spec_file: null
+    role: identifiers-resource
+    registered_name: EnSembl, Sanger Institute and European Bioinformatics Institute, Hinxton, Cambridge
+    register_id: EnSembl, Sanger Institute and European Bioinformatics Institute, Hinxton, Cambridge
+    matched_domain: ensembl.org
+    detected_by: sweep-life-sciences.py
+    detected: '2026-10-15'
+  detected_by: sweep-life-sciences.py
+  first_seen: '2026-10-15'
+generated: '2026-10-15'
+method: searched
+source:
+- https://bio.tools/api/tool/?format=json&toolType=%22Web%20API%22&page=1
+- https://registry.api.identifiers.org/resolutionApi/getResolverDataset
+- https://registry.ga4gh.org/v1/implementations
+- https://registry.ga4gh.org/v1/services
+checked:
+- https://bio.tools/api/tool/?format=json&toolType=%22Web%20API%22&page=1
+- https://registry.api.identifiers.org/resolutionApi/getResolverDataset
+- https://registry.ga4gh.org/v1/implementations
+- https://registry.ga4gh.org/v1/services
