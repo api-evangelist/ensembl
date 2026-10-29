@@ -64,43 +64,105 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Ensembl is a genome annotation database and browser maintained by the European Bioinformatics Institute (EMBL-EBI) and the Wellcome Sanger Institute. It provides comprehensive genome data for vertebrates and other eukaryotic organisms, covering gene annotation, variant data, regulatory features, comparative genomics, and evolutionary analysis across hundreds of species.
+Ensembl is a genome annotation database and browser maintained by the European Bioinformatics Institute (EMBL-EBI) and the Wellcome Sanger Institute. It provides comprehensive genome data for vertebrates and other eukaryotic organisms, covering gene annotation, variant data, regulatory features, comparative genomics, and evolutionary analysis across hundreds of species. The Ensembl REST API offers language-agnostic HTTP access to this genome data without requiring local database installations or Perl API dependencies.
 
-## REST API
+**Areas:** Genomics · Bioinformatics · Genome Annotation · Variant Annotation · Comparative Genomics · Life Sciences · REST API
 
-The Ensembl REST API (v15.12) is available at https://rest.ensembl.org and provides language-agnostic HTTP access to Ensembl genome data without requiring local database installations. No authentication or API key is needed.
+## Ensembl on APIs.io
 
-### Endpoint Categories
+Everything profiled for Ensembl is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ensembl/](https://apis.io/providers/ensembl/)** — or go straight to one of the APIs or properties below.
 
-- **Archive** — Retrieve latest identifier versions
-- **Comparative Genomics** — Gene trees, CAFE trees, alignments, homology
-- **Cross References** — Map between Ensembl IDs and external databases
-- **Information** — Species, assembly, biotype, and metadata queries
-- **Linkage Disequilibrium** — LD calculations between variants
-- **Lookup** — Identify species/database for genes and transcripts
-- **Mapping** — Convert between coordinate systems and assemblies
-- **Ontologies and Taxonomy** — Search term ancestry and relationships
-- **Overlap** — Find overlapping genomic features by region
-- **Phenotype Annotations** — Query phenotype-to-feature associations
-- **Regulation** — Binding matrix retrieval
-- **Sequence** — Genomic sequence retrieval with masking options
-- **Transcript Haplotypes** — Phased haplotype computation
-- **VEP** — Variant effect prediction (HGVS, IDs, regions)
-- **Variation** — Variant queries by ID, PMID, or PMCID
-- **Variation GA4GH** — GA4GH-standardized genomic data access
+### APIs (1)
 
-### Rate Limits
+- [Ensembl REST API](https://apis.io/apis/ensembl/rest-api/) — The Ensembl REST API (v15.12) provides language-agnostic HTTP access to genome annotation data across hundreds of vertebrate and eukaryotic species. It…
 
-- 55,000 requests per hour per IP address
-- Recommended self-throttle: 15 requests per second
-- Rate limit headers: `X-RateLimit-Limit`, `X-RateLimit-Period`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`
-- HTTP 429 with `Retry-After` header when quota exceeded
+### Published properties
 
-## Resources
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- [REST API Documentation](https://rest.ensembl.org/documentation)
-- [Rate Limits Wiki](https://github.com/Ensembl/ensembl-rest/wiki/Rate-Limits)
-- [GitHub Repository](https://github.com/Ensembl/ensembl-rest)
-- [Jupyter Notebooks (Python/R)](https://github.com/Ensembl/rest-api-jupyter-course)
-- [Terms of Use](https://www.ensembl.org/info/about/legal/index.html)
-- [Privacy Notice](https://www.ebi.ac.uk/data-protection/ensembl/privacy-notice)
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ensembl Domain Security](https://apis.io/security/ensembl/ensembl-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ensembl Plans Pricing](https://apis.io/plans/ensembl/ensembl-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ensembl Rate Limits](https://apis.io/rate-limits/ensembl/ensembl-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Ensembl Finops](https://apis.io/finops/ensembl/ensembl-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ensembl.org)
+- [Documentation](https://rest.ensembl.org/documentation)
+- [Terms of service](https://www.ensembl.org/info/about/legal/index.html)
+- [Privacy policy](https://www.ebi.ac.uk/data-protection/ensembl/privacy-notice)
+- [GitHub](https://github.com/Ensembl)
+
+## API Evangelist rating
+
+**Kin Score 12.8** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 9.5 |
+| Access clarity | 10.5 |
+
+**Agent readiness 2.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 6.3** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ensembl/](https://apis.io/providers/ensembl/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Ensembl: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ensembl/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
